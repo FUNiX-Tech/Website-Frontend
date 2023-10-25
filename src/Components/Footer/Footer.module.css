@@ -1,0 +1,14 @@
+.footer_navigation li {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.footer_subscription_form_title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.footer_subscription_social ul {
+  gap: 24px;
+}
