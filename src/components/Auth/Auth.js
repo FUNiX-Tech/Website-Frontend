@@ -4,28 +4,33 @@ import React, { useState } from 'react';
 //Import CSS Module
 import classes from './Auth.module.css';
 
-//Import React Google OAuth2
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+//Import React Google/Facebook OAuth2
 
-//Import JWT_Decode
-import jwt_decode from 'jwt-decode';
+import { LoginSocialGoogle, LoginSocialFacebook } from 'reactjs-social-login';
+
+import {
+  FacebookLoginButton,
+  GoogleLoginButton,
+} from 'react-social-login-buttons';
 
 //Import From  react-router-dom
 import { Form, NavLink } from 'react-router-dom';
 
+const config = {
+  style: { background: '#fff' },
+  activeStyle: { background: '#fff' },
+};
+
 const Auth = ({ login }) => {
-  //ClientID
+  //ClientID Google
   const CLIENT_ID =
     '735715664124-s3g87l80c8q030mp2gi4ddkhj2op7t6p.apps.googleusercontent.com';
 
+  //App ID Facebook
+  const APP_ID = '1970265456677613';
+
   //Get user info from google oauth2 login
   const [userLoginGoogle, setUserLoginGoogle] = useState(null);
-
-  //Handle login successfully
-  const handleLoginSuccess = (credentialResponse) => {
-    const userInfo = jwt_decode(credentialResponse.credential);
-    setUserLoginGoogle(userInfo);
-  };
 
   console.log(userLoginGoogle);
 
@@ -75,17 +80,35 @@ const Auth = ({ login }) => {
             </p>
             <p className='mb-4'>Education to future-proof your career.</p>
             {/* Google/ Facebook Login */}
-            <div className='d-flex justify-content-center gap-3 mb-4'>
-              <GoogleOAuthProvider clientId={CLIENT_ID}>
-                <GoogleLogin
-                  onSuccess={(credentialResponse) => {
-                    handleLoginSuccess(credentialResponse);
-                  }}
-                  onError={() => {
-                    console.log('Login Failed');
-                  }}
-                />
-              </GoogleOAuthProvider>
+            <div className='d-flex  flex-column flex-sm-row gap-3 mb-4  mx-3 '>
+              <LoginSocialGoogle
+                className='w-100 w-sm-50'
+                client_id={CLIENT_ID}
+                onResolve={({ provider, data }) => {
+                  setUserLoginGoogle(data);
+                }}
+                onReject={(err) => {
+                  console.log(err);
+                }}
+              >
+                <GoogleLoginButton>
+                  <span className='fs-6'>
+                    {login ? 'Sign in with Google' : 'Sign up with Google'}
+                  </span>
+                </GoogleLoginButton>
+              </LoginSocialGoogle>
+              <LoginSocialFacebook
+                className='w-100 w-sm-50'
+                appId={APP_ID}
+                onResolve={(response) => console.log(response)}
+                onReject={(error) => console.log(error)}
+              >
+                <FacebookLoginButton>
+                  <span className='fs-6'>
+                    {login ? 'Sign in with Facebook' : 'Sign up with Facebook'}
+                  </span>
+                </FacebookLoginButton>
+              </LoginSocialFacebook>
             </div>
             {/* Google/ Facebook Login */}
             <div className='d-flex align-items-center mx-3 mb-4'>
