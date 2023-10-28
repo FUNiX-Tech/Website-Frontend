@@ -1,17 +1,17 @@
 // React Router
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //Component Imported
-import ErrorPage from './pages/ErrorPage/ErrorPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import HomePage from './pages/HomePage/HomePage';
-import Root from './pages/Root/Root';
-import SignUp from './pages/SignupPage/SignupPage';
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import HomePage from "./pages/HomePage/HomePage";
+import Root from "./pages/Root/Root";
+import SignUp from "./pages/SignupPage/SignupPage";
 
 //Create router
 const router = createBrowserRouter([
   {
-    path: '',
+    path: "",
     errorElement: <ErrorPage />,
     element: <Root />,
     children: [
@@ -23,13 +23,13 @@ const router = createBrowserRouter([
   },
 
   {
-    path: '/login',
+    path: "/login",
     element: <LoginPage />,
     errorElement: <ErrorPage />,
   },
 
   {
-    path: '/signup',
+    path: "/signup",
     element: <SignUp />,
     errorElement: <ErrorPage />,
   },
