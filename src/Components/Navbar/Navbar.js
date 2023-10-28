@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigation = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -108,8 +110,20 @@ export default function Navbar() {
               placeholder="Search"
             />
           </form>
-          <button className="btn btn-outline-primary me-2">Log in</button>
-          <button className="btn btn-primary">Search</button>
+          <button
+            className="btn btn-outline-primary me-2"
+            onClick={() => {
+              navigation("/login");
+            }}
+          >
+            Log In
+          </button>
+          <button
+            className="btn btn-primary"
+            onClick={() => navigation("/signup")}
+          >
+            Sign Up
+          </button>
         </div>
       </div>
     </nav>
